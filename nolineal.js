@@ -553,6 +553,7 @@ let regressionChart = null;
                 intermediateCalcs: { denominator }
             };
         }
+
         function solveSystem(matrix) {
             const n = matrix.length;
             const clone = JSON.parse(JSON.stringify(matrix)); // Copia profunda
@@ -644,7 +645,7 @@ let regressionChart = null;
             analyzeResiduals(data, metrics.predictedValues, params, type);
 
             // Inicializar tooltips
-            initMetricTooltips();
+            //initMetricTooltips();
         }
 
         function calculateMetrics(data, params, type) {
@@ -1031,7 +1032,7 @@ let regressionChart = null;
                     </div>
                     
                     <div class="model-section">
-                        <h4><i class="bi bi-lightbulb"></i> Consejos para el Examen:</h4>
+                        <h4><i class="bi bi-lightbulb"></i> Consejos Generales:</h4>
                         <ol>
                             <li>Verifica siempre los requisitos iniciales</li>
                             <li>Calcula tiempos característicos si es aplicable</li>
@@ -1119,7 +1120,7 @@ let regressionChart = null;
                     </div>
                     
                     <div class="model-section">
-                        <h4><i class="bi bi-lightbulb"></i> Consejos para el Examen:</h4>
+                        <h4><i class="bi bi-lightbulb"></i> Consejos Generalesn:</h4>
                         <ol>
                             <li>Verifica cuidadosamente los valores de X e Y</li>
                             <li>Interpreta el exponente b en contexto físico</li>
@@ -1205,7 +1206,7 @@ let regressionChart = null;
                     </div>
                     
                     <div class="model-section">
-                        <h4><i class="bi bi-lightbulb"></i> Consejos para el Examen:</h4>
+                        <h4><i class="bi bi-lightbulb"></i> Consejos Generales:</h4>
                         <ol>
                             <li>Verifica que no haya valores x ≤ 0</li>
                             <li>Analiza el comportamiento asintótico</li>
@@ -1295,7 +1296,7 @@ let regressionChart = null;
                     </div>
                     
                     <div class="model-section">
-                        <h4><i class="bi bi-lightbulb"></i> Consejos para el Examen:</h4>
+                        <h4><i class="bi bi-lightbulb"></i> Consejos Generales:</h4>
                         <ol>
                             <li>Calcula y grafica el vértice de la parábola</li>
                             <li>Verifica la significancia estadística de cada término</li>
@@ -1390,7 +1391,7 @@ let regressionChart = null;
                     </div>
                     
                     <div class="model-section">
-                        <h4><i class="bi bi-lightbulb"></i> Consejos para el Examen:</h4>
+                        <h4><i class="bi bi-lightbulb"></i> Consejos Generales:</h4>
                         <ol>
                             <li>Calcula y grafica los puntos de inflexión</li>
                             <li>Considera reducir el grado si algún coeficiente no es significativo</li>
@@ -1477,7 +1478,7 @@ let regressionChart = null;
                     </div>
                     
                     <div class="model-section">
-                        <h4><i class="bi bi-lightbulb"></i> Consejos para el Examen:</h4>
+                        <h4><i class="bi bi-lightbulb"></i> Consejos Generales:</h4>
                         <ol>
                             <li>Verifica que no haya valores x cercanos a cero</li>
                             <li>Analiza el comportamiento asintótico</li>
@@ -1589,7 +1590,6 @@ let regressionChart = null;
             document.getElementById('helpTitle').textContent = help.title;
             document.getElementById('helpContent').innerHTML = help.content;
             
-            // Actualizar estado de los botones de navegación
             updateNavButtons(modelType);
             
             modal.style.display = 'block';
@@ -2056,8 +2056,8 @@ function displayIntermediateCalculations(params, type) {
 
             // Mostrar consejos si existen en el modelo
             const tipsSection = document.getElementById('helpModalTips');
-            if (helpContent[type] && helpContent[type].content.includes("Consejos para el Examen")) {
-                const tipsMatch = helpContent[type].content.match(/<h4><i class="bi bi-lightbulb"><\/i> Consejos para el Examen:<\/h4>([\s\S]*?)<\/div>/);
+            if (helpContent[type] && helpContent[type].content.includes("Consejos Generales")) {
+                const tipsMatch = helpContent[type].content.match(/<h4><i class="bi bi-lightbulb"><\/i> Consejos Generales:<\/h4>([\s\S]*?)<\/div>/);
                 if (tipsMatch && tipsMatch[1]) {
                     tipsSection.innerHTML = tipsMatch[1].replace(/<ol>|<\/ol>|<li>|<\/li>/g, '').trim();
                 }
@@ -2068,6 +2068,177 @@ function displayIntermediateCalculations(params, type) {
             // Mostrar modal
             modal.classList.add('show');
         }
+
+        const modelDetails = {
+          'exponential': {
+              icon: 'bi-graph-up-arrow',
+              title: 'Modelo Exponencial',
+              equation: 'y = ae^(bx)',
+              description: 'Modelo que describe crecimiento o decrecimiento exponencial. Útil para modelar procesos con tasas de cambio proporcionales al valor actual.',
+              characteristics: [
+                  'Curva siempre creciente o decreciente',
+                  'Cambio proporcional al valor actual',
+                  'Común en procesos de crecimiento poblacional'
+              ],
+              applications: [
+                  'Crecimiento poblacional',
+                  'Inversiones financieras', 
+                  'Propagación de enfermedades',
+                  'Desintegración radioactiva'
+              ],
+                regressionDetails: {
+                    title: "Regresión Exponencial",
+                    usoRecomendado: "Cuando los datos muestran crecimiento o decaimiento exponencial.",
+                    requisitos: "Todos los valores Y deben ser positivos (y > 0).",
+                    interpretacion: [
+                        "a: Valor inicial cuando x = 0",
+                        "b: Tasa de crecimiento (si b > 0) o decaimiento (si b < 0)"
+                    ],
+                    ejemplosAplicados: [
+                        "Crecimiento bacteriano",
+                        "Desintegración radiactiva", 
+                        "Interés compuesto"
+                    ]
+                }
+            },
+
+          'power': {
+              icon: 'bi-lightning',
+              title: 'Modelo Potencial',
+              equation: 'y = ax^b',
+              description: 'Representa relaciones donde el cambio es proporcional a una potencia de la variable independiente. Común en fenómenos de escala.',
+              characteristics: [
+                  'Curva no lineal con exponente variable',
+                  'Útil para modelar relaciones de escala',
+                  'Sensible al valor del exponente'
+              ],
+              applications: [
+                  'Análisis de escalamiento',
+                  'Crecimiento económico',
+                  'Distribución de recursos',
+                  'Fenómenos biológicos'
+              ]
+          },
+          'logarithmic': {
+            icon: 'bi-graph-down',
+            title: 'Modelo Logarítmico',
+            equation: 'y = a + b * ln(x)',
+            description: 'Describe relaciones donde el cambio es más lento a medida que x aumenta. Típico en procesos de saturación.',
+            characteristics: [
+                'Crecimiento inicial rápido que se desacelera',
+                'Útil para modelar procesos con límites',
+                'Curva cóncava'
+            ],
+            applications: [
+                'Aprendizaje y curvas de experiencia',
+                'Análisis de rendimiento',
+                'Modelos de saturación',
+                'Estudios de difusión tecnológica'
+            ]
+        },
+        'polynomial2': {
+            icon: 'bi-graph-up',
+            title: 'Modelo Polinomial Cuadrático',
+            equation: 'y = ax² + bx + c',
+            description: 'Modelo cuadrático que permite curvas más complejas con un término de segundo grado. Útil para modelar parábolas.',
+            characteristics: [
+                'Permite cambios no lineales simétricos',
+                'Puede representar máximos y mínimos',
+                'Flexible para diferentes formas de curva'
+            ],
+            applications: [
+                'Trayectorias de proyectiles',
+                'Optimización de procesos',
+                'Modelado de fenómenos físicos',
+                'Análisis de rendimiento'
+            ]
+        },
+        'polynomial3': {
+            icon: 'bi-graph-up',
+            title: 'Modelo Polinomial Cúbico',
+            equation: 'y = ax³ + bx² + cx + d',
+            description: 'Modelo cúbico que permite representar curvas más complejas con un término de tercer grado. Captura variaciones más sutiles.',
+            characteristics: [
+                'Mayor flexibilidad que modelos cuadráticos',
+                'Puede representar inflexiones más complejas',
+                'Captura cambios no lineales más detallados'
+            ],
+            applications: [
+                'Modelado de cambios económicos',
+                'Análisis de tendencias complejas',
+                'Simulaciones de sistemas no lineales',
+                'Predicción de comportamientos variables'
+            ]
+        },
+        'hyperbolic': {
+            icon: 'bi-slash-lg',
+            title: 'Modelo Hiperbólico',
+            equation: 'y = a + b/x',
+            description: 'Describe una relación inversa entre variables. Común en fenómenos como la resistencia eléctrica o la hipérbole.',
+            characteristics: [
+                'Asíntota horizontal',
+                'Decrecimiento rápido inicial',
+                'Comportamiento inverso entre variables'
+            ],
+            applications: [
+                'Análisis de costos marginales',
+                'Modelos de aprendizaje',
+                'Fenómenos de saturación',
+                'Estudios de rendimiento decreciente'
+            ]
+        }
+      };
+
+    function showModelHelp(type) {
+    const modal = document.getElementById('helpModal');
+    const details = modelDetails[type];
+    const regressionDetails = details.regressionDetails || {};
+
+    // Actualizar contenido del modal
+    document.getElementById('helpModalIcon').className = `bi ${details.icon}`;
+    document.getElementById('helpModalTitle').textContent = details.title;
+    document.getElementById('helpModalEquation').textContent = details.equation;
+    document.getElementById('helpModalDescription').textContent = details.description;
+    
+    // Formatear características y aplicaciones
+    document.getElementById('helpModalCharacteristics').innerHTML = 
+        details.characteristics.map(c => `- ${c}`).join('<br>');
+    
+    document.getElementById('helpModalApplications').innerHTML = 
+        details.applications.map(a => `- ${a}`).join('<br>');
+
+    // Agregar detalles de regresión si existen
+    const regressionInfoElement = document.getElementById('helpModalRegressionInfo');
+    if (regressionInfoElement && regressionDetails) {
+        let regressionContent = `
+            <h4>Detalles de Regresión</h4>
+            
+            ${regressionDetails.usoRecomendado ? `<p><strong>Uso Recomendado:</strong> ${regressionDetails.usoRecomendado}</p>` : ''}
+            
+            ${regressionDetails.requisitos ? `<p><strong>Requisitos:</strong> ${regressionDetails.requisitos}</p>` : ''}
+            
+            ${regressionDetails.interpretacion ? `
+                <p><strong>Interpretación:</strong></p>
+                <ul>
+                    ${regressionDetails.interpretacion.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            ` : ''}
+            
+            ${regressionDetails.ejemplosAplicados ? `
+                <p><strong>Ejemplos Aplicados:</strong></p>
+                <ul>
+                    ${regressionDetails.ejemplosAplicados.map(ejemplo => `<li>${ejemplo}</li>`).join('')}
+                </ul>
+            ` : ''}
+        `;
+        
+        regressionInfoElement.innerHTML = regressionContent;
+    }
+
+    // Mostrar modal
+    modal.classList.add('show');
+}
+
 
       function closeHelpModal() {
             const modal = document.getElementById('helpModal');
@@ -2080,73 +2251,94 @@ function displayIntermediateCalculations(params, type) {
                 closeHelpModal();
             }
         });
-
-// Tooltips para las métricas
-const metricTooltips = {
-    mse: "Error Cuadrático Medio (ECM):\nPromedio de los cuadrados de los errores entre los valores observados y los predichos.",
-    mae: "Error Medio Absoluto (EMA):\nPromedio de los valores absolutos de los errores.",
-    r2: "Coeficiente de Determinación (R²):\nProporción de la variabilidad de Y explicada por el modelo.",
-    se: "Error Estándar de Regresión:\nDispersión de los residuos respecto a la recta de regresión.",
-    see: "Error Estándar (SEE):\nDesviación estándar de los residuos.",
-    r2adj: "R² Ajustado:\nR² corregido por el número de variables independientes.",
-    aic: "Criterio de Información de Akaike (AIC):\nEvalúa la calidad del modelo penalizando la complejidad.",
-    sst: "Suma de Cuadrados Total (SST):\nSuma de los cuadrados de las diferencias entre los valores observados y la media."
-};
-
-
-
-// Reemplaza la función initMetricTooltips por esta nueva versión:
-function initTooltips() {
+        function initTooltips() {
     const metrics = [
         { 
             id: 'mseValue', 
-            desc: 'Error Cuadrático Medio (ECM): Mide el promedio de los errores al cuadrado. Un valor más cercano a 0 indica un mejor ajuste del modelo.' 
+            title: 'Error Cuadrático Medio (ECM)',
+            desc: 'Mide el promedio de los errores al cuadrado. Un valor más cercano a 0 indica un mejor ajuste del modelo.' 
         },
         { 
             id: 'maeValue', 
-            desc: 'Error Medio Absoluto (EMA): Representa el promedio de los valores absolutos de los errores. Menos sensible a valores atípicos que el ECM.' 
+            title: 'Error Medio Absoluto (EMA)',
+            desc: 'Representa el promedio de los valores absolutos de los errores. Menos sensible a valores atípicos que el ECM.' 
         },
         { 
             id: 'r2Value', 
-            desc: 'Coeficiente de Determinación (R²): Indica qué proporción de la varianza es explicada por el modelo. Varía entre 0 y 1, siendo 1 un ajuste perfecto.' 
+            title: 'Coeficiente de Determinación (R²)',
+            desc: 'Indica qué proporción de la varianza es explicada por el modelo. Varía entre 0 y 1, siendo 1 un ajuste perfecto.' 
         },
         { 
             id: 'seValue', 
-            desc: 'Error Estándar de Regresión: Mide la desviación típica de los residuos (errores). Un valor más pequeño indica un mejor ajuste del modelo.' 
+            title: 'Error Estándar de Regresión',
+            desc: 'Mide la desviación típica de los residuos (errores). Un valor más pequeño indica un mejor ajuste del modelo.' 
         },
         { 
             id: 'seeValue', 
-            desc: 'Error Estándar (SEE - Standard Error of Estimate): Mide la dispersión de los puntos de datos alrededor de la línea de regresión.' 
+            title: 'Error Estándar (SEE)',
+            desc: 'Mide la dispersión de los puntos de datos alrededor de la línea de regresión.' 
         },
         { 
             id: 'r2adjValue', 
-            desc: 'R² Ajustado: Versión modificada del R² que penaliza la adición de predictores que no mejoran significativamente el modelo.' 
+            title: 'R² Ajustado',
+            desc: 'Versión modificada del R² que penaliza la adición de predictores que no mejoran significativamente el modelo.' 
         },
         { 
             id: 'aicValue', 
-            desc: 'Criterio de Información de Akaike (AIC): Evalúa la calidad del modelo considerando su complejidad. Valores más bajos indican mejores modelos.' 
+            title: 'Criterio de Información de Akaike (AIC)',
+            desc: 'Evalúa la calidad del modelo considerando su complejidad. Valores más bajos indican mejores modelos.' 
         },
         { 
             id: 'sstValue', 
-            desc: 'Suma de Cuadrados Total (SST): Mide la variabilidad total en los datos antes de ajustar el modelo de regresión.' 
+            title: 'Suma de Cuadrados Total (SST)',
+            desc: 'Mide la variabilidad total en los datos antes de ajustar el modelo de regresión.' 
         }
     ];
+  metrics.forEach(metric => {
+        const element = document.getElementById(metric.id);
+        if (element) {
+            // Verificar si ya existe un tooltip para evitar duplicados
+            if (element.parentNode.querySelector('.metric-tooltip')) return;
 
-    metrics.forEach(metric => {
-        const el = document.getElementById(metric.id);
-        if (!el) return;
-        // Elimina tooltip anterior si existe
-        let oldTooltip = el.parentElement.querySelector('.metric-tooltip');
-        if (oldTooltip) oldTooltip.remove();
+            const tooltip = document.createElement('div');
+            tooltip.className = 'metric-tooltip';
+            tooltip.innerHTML = `
+                <div class="tooltip-header">${metric.title}</div>
+                <div class="tooltip-body">${metric.desc}</div>
+            `;
 
-        // Crea el tooltip y lo agrega al .metric-card
-        let tooltip = document.createElement('div');
-        tooltip.className = 'metric-tooltip';
-        tooltip.innerText = metric.desc;
-        el.parentElement.appendChild(tooltip);
+            // Crear contenedor solo si no existe
+            let tooltipContainer = element.closest('.tooltip-container');
+            if (!tooltipContainer) {
+                tooltipContainer = document.createElement('div');
+                tooltipContainer.className = 'tooltip-container';
+                element.parentNode.insertBefore(tooltipContainer, element);
+                tooltipContainer.appendChild(element);
+            }
+            
+            tooltipContainer.appendChild(tooltip);
+
+            // Eventos mejorados
+            element.addEventListener('mouseenter', () => {
+                tooltip.style.display = 'block';
+                positionTooltip(element, tooltip);
+            });
+
+            element.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        }
     });
-}
 
-// Llama a esta función después de mostrar las métricas
-// Por ejemplo, al final de displayResults:
+    // Función para posicionar correctamente el tooltip
+    function positionTooltip(element, tooltip) {
+        const rect = element.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        
+        tooltip.style.left = '40%';
+        tooltip.style.bottom = `calc(100% + 10px)`;
+        tooltip.style.transform = 'translateX(-50%)';
+        tooltip.style.width = '240px';
+    }
+}
 initTooltips();

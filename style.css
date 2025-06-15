@@ -508,33 +508,53 @@ tr:hover {
     position: relative;
     z-index: 1;
 }
-
-/* Tooltip - Estilo exacto */
-.metric-tooltip {
-    visibility: hidden;
-    position: absolute;
-    z-index: 1000; /* Valor muy alto para asegurar que esté encima */
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--main-bg);
-    color: var(--text-primary);
-    text-align: center;
-    border-radius: 8px;
-    padding: 12px;
-    width: 300px;
-    opacity: 0;
-    transition: opacity 0.3s, visibility 0.3s;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    font-size: 0.85rem;
-    line-height: 1.5;
-    pointer-events: none;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+/* Tooltip Container */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    width: 70%;
 }
 
+/* Tooltip Styles */
+.metric-tooltip {
+    position: absolute;
+    display: none;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--highlight) 100%);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    width: 200px;
+    text-align: left;
+    pointer-events: none;
+}
+
+.metric-tooltip .tooltip-header {
+    color: var(--primary);
+    font-weight: 400;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+}
+
+.metric-tooltip .tooltip-body {
+    color: var(--text-secondary);
+    font-size: 0.90rem;
+    line-height: 1.4;
+}
+
+/* Flecha del tooltip */
+.metric-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: var(--card-bg) transparent transparent transparent;
+}
 .metric-card:hover .metric-tooltip {
     visibility: visible;
     opacity: 1;
